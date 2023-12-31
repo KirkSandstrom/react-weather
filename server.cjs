@@ -61,7 +61,7 @@ app.get("/forecast", (req, res) => {
 });
 
 // route: /search - returns forecast weather data
-app.get("/search", (req, res) => {
+app.get("/search", async (req, res) => {
   const options = {
     method: "GET",
     url: "http://api.weatherapi.com/v1/search.json",
@@ -71,13 +71,11 @@ app.get("/search", (req, res) => {
     },
   };
 
-  axios
-    .request(options)
-    .then(function (response) {
-      res.json(response.data);
-    })
-    .catch(function (error) {
-      res.send("ERROR");
-      console.error(error);
-    });
+  try {
+    const response = await axios.request(options); // that allows us to await inside the function
+    res.json(response.data);
+  } catch (e) {
+    res.send("ERROR");
+    console.error(error);
+  }
 });

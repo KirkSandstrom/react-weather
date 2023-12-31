@@ -15,7 +15,6 @@ export default function WeatherData() {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
         setWeatherData(response.data);
       })
       .catch(function (error) {
