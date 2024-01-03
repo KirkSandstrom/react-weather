@@ -1,41 +1,34 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function WeatherData() {
-  const [weatherData, setWeatherData] = useState([]);
-  useEffect(() => {
-    const options = {
-      method: "GET",
-      url: "http://localhost:5000/forecast",
-      params: {
-        q: "03801",
-      },
-    };
+export default function WeatherData({ weatherData, loading, error }) {
+  const dailyForecastCards = weatherData?.forecast?.forecastday.map(
+    (forecastday) => (
+      <div>
+        <p>DATE: {forecastday?.date}</p>
+        <p>MINTEMP: {forecastday?.day?.mintemp_f}</p>
+        <p>MAXTEMP: {forecastday?.day?.maxtemp_f}</p>
+        <p>CHANCE OF RAIN: {forecastday?.day?.daily_chance_of_rain}</p>
+        <p>TOTAL PRECIP - IN: {forecastday?.day?.totalprecip_in}</p>
+        <p>CHANCE OF SNOW: {forecastday?.day?.daily_chance_of_snow}</p>
+        <p>TOTAL SNOW - CM: {forecastday?.day?.totalsnow_cm}</p>
+        <p>CONDITION: {forecastday?.day?.condition?.text}</p>
+        <img src={forecastday?.day?.condition?.icon}></img>
+      </div>
+    )
+  );
 
-    axios
-      .request(options)
-      .then(function (response) {
-        setWeatherData(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  }, []);
-
-  if (!weatherData.location?.country) {
+  if (loading) {
     return <>loading</>;
   }
 
-  return (
-    <>
-      <p>Hello from the weather data app!</p>
-      <div key="1">
-        <p>
-          {weatherData.location?.country
-            ? weatherData.location?.country
-            : "loading"}
-        </p>
-      </div>
-    </>
-  );
+  if (error) {
+    return <>{error}</>;
+  }
+
+  if (!weatherData.forecast) {
+    return <>Please use the search box above to make a selection</>;
+  }
+
+  return <>{dailyForecastCards}</>;
 }

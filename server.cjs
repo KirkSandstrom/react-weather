@@ -36,7 +36,7 @@ app.get("/current", (req, res) => {
 });
 
 // route: /forecast - returns forecast weather data
-app.get("/forecast", (req, res) => {
+app.get("/forecast", async (req, res) => {
   const options = {
     method: "GET",
     url: "http://api.weatherapi.com/v1/forecast.json",
@@ -49,15 +49,13 @@ app.get("/forecast", (req, res) => {
     },
   };
 
-  axios
-    .request(options)
-    .then(function (response) {
-      res.json(response.data);
-    })
-    .catch(function (error) {
-      res.send("ERROR");
-      console.error(error);
-    });
+  try {
+    const response = await axios.request(options);
+    res.json(response.data);
+  } catch (error) {
+    res.send("ERROR");
+    console.error(error);
+  }
 });
 
 // route: /search - returns forecast weather data
