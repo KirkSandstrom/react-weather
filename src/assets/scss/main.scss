@@ -1,0 +1,80 @@
+// variables
+$background-1: #313638;
+
+// base / resets
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+// App
+:root {
+  background-color: $background-1;
+}
+
+// App container
+.weather-app-container {
+  height: calc(100vh - 4rem);
+  width: 60%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 5px;
+  background-color: #6ccff6;
+}
+
+// Location Search
+.search-container {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #fffffc;
+  color: #000;
+
+  &--border-radius-all {
+    border-radius: 5px;
+  }
+
+  &--border-radius-top-only {
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+.search-results-list {
+  position: absolute;
+  width: 100%;
+
+  &__item {
+    list-style-type: none;
+
+    &:last-child .search-results-list__button {
+      border-radius: 0px 0px 5px 5px;
+    }
+  }
+
+  &__button {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    text-align: left;
+    border-radius: 0;
+    border: none;
+    background-color: #fffffc;
+    color: #000;
+
+    &:hover,
+    &:focus {
+      background-color: #d6d6d6;
+      color: #f06543;
+      cursor: pointer;
+    }
+  }
+}

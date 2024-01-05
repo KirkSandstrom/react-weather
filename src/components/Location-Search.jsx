@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-export default function LocationSearch({ handleClick }) {
-  const [searchQuery, setSearchQuery] = useState();
-  const [searchResults, setSearchResults] = useState([]);
-
+export default function LocationSearch({
+  handleClick,
+  searchQuery,
+  setSearchQuery,
+  searchResults,
+  setSearchResults,
+}) {
   function handleChange(e) {
     setSearchQuery(e.target.value);
   }
@@ -31,8 +34,11 @@ export default function LocationSearch({ handleClick }) {
   }, [searchQuery]);
 
   const searchResultsList = searchResults.map((searchResult) => (
-    <li key={searchResult.id}>
-      <button onClick={() => handleClick(searchResult.url)}>
+    <li key={searchResult.id} className="search-results-list__item">
+      <button
+        className="search-results-list__button"
+        onClick={() => handleClick(searchResult.url)}
+      >
         {searchResult.name}, {searchResult.region}, {searchResult.country}
       </button>
     </li>
@@ -40,14 +46,19 @@ export default function LocationSearch({ handleClick }) {
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="City, Zip Code, or Lat/Long"
-        onChange={handleChange}
-      ></input>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="City, Zip Code, or Lat/Long"
+          className={
+            searchResults.length > 0
+              ? "search-input search-input--border-radius-top-only"
+              : "search-input search-input--border-radius-all"
+          }
+          onChange={handleChange}
+        ></input>
 
-      <div>
-        <ul>{searchResultsList}</ul>
+        <ul className="search-results-list">{searchResultsList}</ul>
       </div>
     </>
   );

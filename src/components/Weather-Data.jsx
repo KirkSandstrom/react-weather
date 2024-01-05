@@ -19,15 +19,27 @@ export default function WeatherData({ weatherData, loading, error }) {
   );
 
   if (loading) {
-    return <>loading</>;
+    return (
+      <>
+        <p>loading</p>
+      </>
+    );
   }
 
   if (error) {
-    return <>{error}</>;
+    return (
+      <>
+        <p>{error}</p>
+      </>
+    );
   }
 
   if (!weatherData.forecast) {
-    return <>Please use the search box above to make a selection</>;
+    return (
+      <>
+        <p>Please use the search box above to make a selection</p>
+      </>
+    );
   }
 
   return <>{dailyForecastCards}</>;

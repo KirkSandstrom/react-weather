@@ -1,4 +1,3 @@
-import "./assets/scss/App.scss";
 import { useState } from "react";
 import axios from "axios";
 import WeatherData from "./components/Weather-Data.jsx";
@@ -8,6 +7,8 @@ function App() {
   const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
+  const [searchQuery, setSearchQuery] = useState();
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleLocationClick = async (url) => {
     const options = {
@@ -23,6 +24,7 @@ function App() {
       const response = await axios.request(options);
       setWeatherData(response.data);
       setLoading(false);
+      setSearchResults([]);
     } catch (error) {
       setError(error);
     }
@@ -30,8 +32,20 @@ function App() {
 
   return (
     <>
-      <LocationSearch handleClick={handleLocationClick} />
-      <WeatherData weatherData={weatherData} loading={loading} error={error} />
+      <div className="weather-app-container">
+        <LocationSearch
+          handleClick={handleLocationClick}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+        />
+        <WeatherData
+          weatherData={weatherData}
+          loading={loading}
+          error={error}
+        />
+      </div>
     </>
   );
 }
