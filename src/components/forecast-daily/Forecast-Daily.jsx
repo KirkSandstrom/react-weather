@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import MessageCard from "./sub-components/Message-Card";
 
-export default function WeatherData({ weatherData, loading, error }) {
+export default function ForecastDaily({ weatherData, loading, error }) {
   const dailyForecastCards = weatherData?.forecast?.forecastday.map(
     (forecastday) => (
       <div>
@@ -21,7 +22,7 @@ export default function WeatherData({ weatherData, loading, error }) {
   if (loading) {
     return (
       <>
-        <p>loading</p>
+        <MessageCard mainContent="loading" />
       </>
     );
   }
@@ -29,7 +30,7 @@ export default function WeatherData({ weatherData, loading, error }) {
   if (error) {
     return (
       <>
-        <p>{error}</p>
+        <MessageCard mainContent={error} />
       </>
     );
   }
@@ -37,10 +38,20 @@ export default function WeatherData({ weatherData, loading, error }) {
   if (!weatherData.forecast) {
     return (
       <>
-        <p>Please use the search box above to make a selection</p>
+        <MessageCard mainContent="Please use the search box above to make a selection" />
       </>
     );
   }
 
-  return <>{dailyForecastCards}</>;
+  return (
+    <>
+      <MessageCard
+        headingLead="weather for"
+        heading={weatherData?.location?.name + ", "}
+        headingLight={weatherData?.location?.region}
+        headingTrailer={weatherData?.location?.country}
+      />
+      {dailyForecastCards}
+    </>
+  );
 }

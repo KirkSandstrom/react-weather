@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import WeatherData from "./components/Weather-Data.jsx";
+import ForecastDaily from "./components/forecast-daily/Forecast-Daily.jsx";
 import LocationSearch from "./components/Location-Search.jsx";
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
           searchResults={searchResults}
           setSearchResults={setSearchResults}
         />
-        <WeatherData
+        <ForecastDaily
           weatherData={weatherData}
           loading={loading}
           error={error}
