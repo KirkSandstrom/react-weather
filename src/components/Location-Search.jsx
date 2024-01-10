@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import useDebounce from "../hooks/useDebounce";
 
 export default function LocationSearch({
   handleClick,
@@ -12,6 +13,19 @@ export default function LocationSearch({
     setSearchQuery(e.target.value);
   }
 
+  const debouncedCallback = useDebounce(
+    (options) =>
+      axios
+        .request(options)
+        .then(function (response) {
+          setSearchResults(response.data);
+        })
+        .catch(function (error) {
+          console.error(error);
+        }),
+    200
+  );
+
   useEffect(() => {
     if (searchQuery) {
       const options = {
@@ -22,14 +36,7 @@ export default function LocationSearch({
         },
       };
 
-      axios
-        .request(options)
-        .then(function (response) {
-          setSearchResults(response.data);
-        })
-        .catch(function (error) {
-          console.error(error);
-        });
+      debouncedCallback(options);
     }
   }, [searchQuery]);
 
@@ -56,6 +63,7 @@ export default function LocationSearch({
               : "search-input search-input--border-radius-all"
           }
           onChange={handleChange}
+          value={searchQuery}
         ></input>
 
         <ul className="search-results-list">{searchResultsList}</ul>

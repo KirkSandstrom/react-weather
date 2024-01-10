@@ -7,7 +7,7 @@ function App() {
   const [weatherData, setWeatherData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   const handleLocationClick = async (url) => {
@@ -25,6 +25,7 @@ function App() {
       setWeatherData(response.data);
       setLoading(false);
       setSearchResults([]);
+      setSearchQuery("");
     } catch (error) {
       setError(error);
     }
