@@ -3,10 +3,24 @@ import { useState, useEffect } from "react";
 import MessageCard from "./sub-components/Message-Card";
 
 export default function ForecastDaily({ weatherData, loading, error }) {
+  // prevents the issue noted here: https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
+  function formatDate(dateString) {
+    const date = new Date(dateString.replace(/-/g, "/"));
+
+    const formattedDate = date.toLocaleDateString("en-us", {
+      weekday: "long",
+      month: "numeric",
+      day: "numeric",
+    });
+
+    return formattedDate;
+  }
+
   const dailyForecastCards = weatherData?.forecast?.forecastday.map(
     (
       {
         date,
+        date_epoch,
         day: {
           mintemp_f,
           maxtemp_f,
@@ -21,6 +35,7 @@ export default function ForecastDaily({ weatherData, loading, error }) {
     ) => (
       <div key={key}>
         <p>DATE: {date}</p>
+        <p>FORMATTED DATE: {formatDate(date)}</p>
         <p>MINTEMP: {mintemp_f}</p>
         <p>MAXTEMP: {maxtemp_f}</p>
         <p>CHANCE OF RAIN: {daily_chance_of_rain}</p>
