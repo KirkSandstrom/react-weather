@@ -9,6 +9,12 @@ $background-1: #313638;
   font-family: "Roboto", sans-serif;
 }
 
+// Utilities
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
 // App
 :root {
   background-color: $background-1;
@@ -16,7 +22,7 @@ $background-1: #313638;
 
 // App container
 .weather-app-container {
-  height: calc(100vh - 4rem);
+  min-height: calc(100vh - 4rem);
   width: 60%;
   max-width: 700px;
   margin: 2rem auto;
@@ -107,5 +113,77 @@ $background-1: #313638;
       font-size: 1.25rem;
       font-weight: normal;
     }
+  }
+}
+
+// Forecast Card
+.forecast-card {
+  padding: 1rem 0.5rem;
+  background-color: #fffffc;
+  color: #313638;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  font-size: 1.25rem;
+
+  &--row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &--date-img-container {
+    display: flex;
+    align-items: center;
+  }
+
+  &--text-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    column-gap: 1rem;
+
+    &-group {
+      flex-basis: 50%;
+      border-bottom: 1px solid #313638;
+      &-inner {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.25rem;
+      }
+    }
+  }
+
+  &--date {
+  }
+
+  &--temp-container {
+  }
+
+  &--min-temp {
+  }
+
+  &--max-temp {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+
+  &--chance-rain {
+  }
+
+  &--total-precip {
+  }
+
+  &--chance-snow {
+  }
+
+  &--total-snow {
+  }
+
+  &--condition {
+  }
+
+  &--condition-img {
   }
 }

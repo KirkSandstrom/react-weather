@@ -16,6 +16,11 @@ export default function ForecastDaily({ weatherData, loading, error }) {
     return formattedDate;
   }
 
+  function roundedToFixed(input, digits) {
+    var rounder = Math.pow(10, digits);
+    return (Math.round(input * rounder) / rounder).toFixed(digits);
+  }
+
   const dailyForecastCards = weatherData?.forecast?.forecastday.map(
     (
       {
@@ -33,17 +38,53 @@ export default function ForecastDaily({ weatherData, loading, error }) {
       },
       key
     ) => (
-      <div key={key}>
-        <p>DATE: {date}</p>
-        <p>FORMATTED DATE: {formatDate(date)}</p>
-        <p>MINTEMP: {mintemp_f}</p>
-        <p>MAXTEMP: {maxtemp_f}</p>
-        <p>CHANCE OF RAIN: {daily_chance_of_rain}</p>
-        <p>TOTAL PRECIP - IN: {totalprecip_in}</p>
-        <p>CHANCE OF SNOW: {daily_chance_of_snow}</p>
-        <p>TOTAL SNOW - CM: {totalsnow_cm}</p>
-        <p>CONDITION: {text}</p>
-        <img src={icon}></img>
+      <div className="forecast-card" key={key}>
+        <div className="forecast-card--row">
+          <p className="forecast-card--date">{formatDate(date)}</p>
+          <img className="forecast-card--condition-img" src={icon}></img>
+          <p className="forecast-card--temp-container">
+            <span className="forecast-card--max-temp">
+              {Math.round(maxtemp_f)}&deg;
+            </span>
+            <span className="forecast-card--min-temp">
+              {" "}
+              /{Math.round(mintemp_f)}&deg;
+            </span>
+          </p>
+        </div>
+        <div className="forecast-card--row">
+          <p className="forecast-card--condition">{text}</p>
+        </div>
+        <div className="forecast-card--text-row">
+          <div className="forecast-card--text-row-group">
+            <div className="forecast-card--text-row-group-inner">
+              <span>Chance of Rain</span>
+              <span className="font-weight-bold">{daily_chance_of_rain}%</span>
+            </div>
+          </div>
+          <div className="forecast-card--text-row-group">
+            <div className="forecast-card--text-row-group-inner">
+              <span>Total Rain Fall</span>
+              <span className="font-weight-bold">{totalprecip_in}"</span>
+            </div>
+          </div>
+        </div>
+        <div className="forecast-card--text-row">
+          <div className="forecast-card--text-row-group">
+            <div className="forecast-card--text-row-group-inner">
+              <span>Chance of Snow</span>
+              <span className="font-weight-bold">{daily_chance_of_snow}%</span>
+            </div>
+          </div>
+          <div className="forecast-card--text-row-group">
+            <div className="forecast-card--text-row-group-inner">
+              <span>Total Snow Fall</span>
+              <span className="font-weight-bold">
+                {roundedToFixed(totalsnow_cm / 2.54, 1)}"
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     )
   );
