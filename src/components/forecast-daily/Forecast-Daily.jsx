@@ -80,7 +80,7 @@ export default function ForecastDaily({ weatherData, loading, error }) {
             <div className="forecast-card--text-row-group-inner">
               <span>Total Snow Fall</span>
               <span className="font-weight-bold">
-                {roundedToFixed(totalsnow_cm / 2.54, 1)}"
+                {roundedToFixed(totalsnow_cm / 2.54, 0)}"
               </span>
             </div>
           </div>
