@@ -1,6 +1,5 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
 import MessageCard from "./sub-components/Message-Card";
+import ForecastCard from "./sub-components/Forecast-Card";
 
 export default function ForecastDaily({ weatherData, loading, error }) {
   // prevents the issue noted here: https://stackoverflow.com/questions/7556591/is-the-javascript-date-object-always-one-day-off
@@ -25,7 +24,6 @@ export default function ForecastDaily({ weatherData, loading, error }) {
     (
       {
         date,
-        date_epoch,
         day: {
           mintemp_f,
           maxtemp_f,
@@ -38,54 +36,18 @@ export default function ForecastDaily({ weatherData, loading, error }) {
       },
       key
     ) => (
-      <div className="forecast-card" key={key}>
-        <div className="forecast-card--row">
-          <p className="forecast-card--date">{formatDate(date)}</p>
-          <img className="forecast-card--condition-img" src={icon}></img>
-          <p className="forecast-card--temp-container">
-            <span className="forecast-card--max-temp">
-              {Math.round(maxtemp_f)}&deg;
-            </span>
-            <span className="forecast-card--min-temp">
-              {" "}
-              /{Math.round(mintemp_f)}&deg;
-            </span>
-          </p>
-        </div>
-        <div className="forecast-card--row">
-          <p className="forecast-card--condition">{text}</p>
-        </div>
-        <div className="forecast-card--text-row">
-          <div className="forecast-card--text-row-group">
-            <div className="forecast-card--text-row-group-inner">
-              <span>Chance of Rain</span>
-              <span className="font-weight-bold">{daily_chance_of_rain}%</span>
-            </div>
-          </div>
-          <div className="forecast-card--text-row-group">
-            <div className="forecast-card--text-row-group-inner">
-              <span>Total Rain Fall</span>
-              <span className="font-weight-bold">{totalprecip_in}"</span>
-            </div>
-          </div>
-        </div>
-        <div className="forecast-card--text-row">
-          <div className="forecast-card--text-row-group">
-            <div className="forecast-card--text-row-group-inner">
-              <span>Chance of Snow</span>
-              <span className="font-weight-bold">{daily_chance_of_snow}%</span>
-            </div>
-          </div>
-          <div className="forecast-card--text-row-group">
-            <div className="forecast-card--text-row-group-inner">
-              <span>Total Snow Fall</span>
-              <span className="font-weight-bold">
-                {roundedToFixed(totalsnow_cm / 2.54, 0)}"
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ForecastCard
+        date={formatDate(date)}
+        mintempF={Math.round(mintemp_f)}
+        maxTempF={Math.round(maxtemp_f)}
+        dailyChanceOfRain={daily_chance_of_rain}
+        totalPrecipIn={totalprecip_in}
+        dailyChanceOfSnow={daily_chance_of_snow}
+        totalSnowIn={roundedToFixed(totalsnow_cm / 2.54, 0)}
+        conditionImage={icon}
+        conditionDescription={text}
+        key={key}
+      ></ForecastCard>
     )
   );
 
