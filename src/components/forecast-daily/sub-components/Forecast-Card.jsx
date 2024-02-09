@@ -11,7 +11,7 @@ export default function ForecastCard({
 }) {
   return (
     <div className="forecast-card">
-      <div className="forecast-card__row">
+      <div className="forecast-card__row forecast-card__row--flex-wrap">
         <p className="forecast-card__date">{date}</p>
         <img
           className="forecast-card__condition-img"
