@@ -137,14 +137,14 @@ $tablet: 1024px;
   margin-bottom: 2rem;
   font-size: 1.25rem;
 
-  &--row {
+  &__row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
   }
 
-  &--text-row {
+  &__text-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -173,36 +173,36 @@ $tablet: 1024px;
     }
   }
 
-  &--date {
+  &__date {
     font-weight: bold;
   }
 
-  &--temp-container {
+  &__temp-container {
   }
 
-  &--min-temp {
+  &__min-temp {
   }
 
-  &--max-temp {
+  &__max-temp {
     font-size: 2.5rem;
     font-weight: bold;
   }
 
-  &--chance-rain {
+  &__chance-rain {
   }
 
-  &--total-precip {
+  &__total-precip {
   }
 
-  &--chance-snow {
+  &__chance-snow {
   }
 
-  &--total-snow {
+  &__total-snow {
   }
 
-  &--condition {
+  &__condition {
   }
 
-  &--condition-img {
+  &__condition-img {
   }
 }
