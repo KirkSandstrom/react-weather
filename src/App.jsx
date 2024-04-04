@@ -10,7 +10,7 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleLocationClick = async (url) => {
+  const getLocationForecast = async (url) => {
     const options = {
       method: "GET",
       url: "http://localhost:5000/forecast",
@@ -35,7 +35,7 @@ function App() {
     <>
       <div className="weather-app-container">
         <LocationSearch
-          handleClick={handleLocationClick}
+          getLocationForecast={getLocationForecast}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           searchResults={searchResults}
