@@ -70,7 +70,7 @@ app.get("/search", async (req, res) => {
   };
 
   try {
-    const response = await axios.request(options); // that allows us to await inside the function
+    const response = await axios.request(options);
     res.json(response.data);
   } catch (e) {
     res.send("ERROR");
