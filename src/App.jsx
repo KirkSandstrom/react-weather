@@ -13,7 +13,7 @@ function App() {
   const getLocationForecast = async (url) => {
     const options = {
       method: "GET",
-      url: "http://localhost:5000/forecast",
+      url: `${import.meta.env.VITE_BACKEND_URL}:5000/forecast`,
       params: {
         q: url,
       },

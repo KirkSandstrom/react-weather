@@ -98,7 +98,7 @@ export default function LocationSearch({
     if (searchQuery) {
       const options = {
         method: "GET",
-        url: "http://localhost:5000/search",
+        url: `${import.meta.env.VITE_BACKEND_URL}:5000/search`,
         params: {
           q: searchQuery,
         },
