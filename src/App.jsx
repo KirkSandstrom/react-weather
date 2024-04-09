@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import ForecastDaily from "./components/forecast-daily/Forecast-Daily.jsx";
 import LocationSearch from "./components/Location-Search.jsx";
+import { BACKEND_CONNECTION_STRING } from "./constants";
 
 function App() {
   const [weatherData, setWeatherData] = useState([]);
@@ -13,7 +14,7 @@ function App() {
   const getLocationForecast = async (url) => {
     const options = {
       method: "GET",
-      url: `${import.meta.env.VITE_BACKEND_URL}:5000/forecast`,
+      url: `${BACKEND_CONNECTION_STRING}/forecast`,
       params: {
         q: url,
       },
