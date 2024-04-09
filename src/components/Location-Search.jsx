@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import useDebounce from "../hooks/useDebounce";
+import { BACKEND_CONNECTION_STRING } from "../constants";
 
 export default function LocationSearch({
   getLocationForecast,
@@ -98,7 +99,7 @@ export default function LocationSearch({
     if (searchQuery) {
       const options = {
         method: "GET",
-        url: `${import.meta.env.VITE_BACKEND_URL}:5000/search`,
+        url: `${BACKEND_CONNECTION_STRING}/search`,
         params: {
           q: searchQuery,
         },
